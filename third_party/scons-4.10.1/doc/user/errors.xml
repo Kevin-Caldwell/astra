@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+
+<!--
+SPDX-FileCopyrightText: Copyright The SCons Foundation (https://scons.org)
+SPDX-License-Identifier: MIT
+SPDX-FileType: DOCUMENTATION
+
+This file is processed by the bin/SConsDoc.py module.
+-->
+
+<!DOCTYPE sconsdoc [
+    <!ENTITY % scons SYSTEM "../scons.mod">
+    %scons;
+
+    <!ENTITY % builders-mod SYSTEM "../generated/builders.mod">
+    %builders-mod;
+    <!ENTITY % functions-mod SYSTEM "../generated/functions.mod">
+    %functions-mod;
+    <!ENTITY % tools-mod SYSTEM "../generated/tools.mod">
+    %tools-mod;
+    <!ENTITY % variables-mod SYSTEM "../generated/variables.mod">
+    %variables-mod;
+
+]>
+
+<chapter id="chap-errors"
+         xmlns="http://www.scons.org/dbxsd/v1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.scons.org/dbxsd/v1.0 http://www.scons.org/dbxsd/v1.0/scons.xsd">
+<title>Errors</title>
+
+<!-- TOOD: placeholder file, not currently included in build -->
+
+ <para>
+
+   XXX
+
+ </para>
+
+ <section id="sect-errors-xxx">
+ <title>XXX</title>
+
+   <para>
+
+   XXX
+
+   </para>
+
+ </section>
+</chapter>

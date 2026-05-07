@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+
+<!--
+SPDX-FileCopyrightText: Copyright The SCons Foundation (https://scons.org)
+SPDX-License-Identifier: MIT
+SPDX-FileType: DOCUMENTATION
+
+This file is processed by the bin/SConsDoc.py module.
+-->
+
+<!DOCTYPE sconsdoc [
+    <!ENTITY % scons SYSTEM "../scons.mod">
+    %scons;
+
+    <!ENTITY % builders-mod SYSTEM "../generated/builders.mod">
+    %builders-mod;
+    <!ENTITY % functions-mod SYSTEM "../generated/functions.mod">
+    %functions-mod;
+    <!ENTITY % tools-mod SYSTEM "../generated/tools.mod">
+    %tools-mod;
+    <!ENTITY % variables-mod SYSTEM "../generated/variables.mod">
+    %variables-mod;
+]>
+
+<appendix id="app-variables"
+          xmlns="http://www.scons.org/dbxsd/v1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.scons.org/dbxsd/v1.0 http://www.scons.org/dbxsd/v1.0/scons.xsd">
+<title>Construction Variables</title>
+
+<para>
+
+This appendix contains descriptions of all of the
+construction variables that are <emphasis>potentially</emphasis>
+available "out of the box" in this version of SCons.
+Whether or not setting a construction variable
+in a construction environment
+will actually have an effect depends on
+whether any of the Tools and/or Builders
+that use the variable have been
+included in the construction environment.
+
+</para>
+
+<para>
+
+In this appendix, we have
+appended the initial <envar>$</envar>
+(dollar sign) to the beginning of each
+variable name when it appears in the text,
+but left off the dollar sign
+in the left-hand column
+where the name appears for each entry.
+
+</para>
+
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../generated/variables.gen"/>
+
+</appendix>

@@ -1,0 +1,145 @@
+<?xml version='1.0'?>
+
+<!--
+SPDX-FileCopyrightText: Copyright The SCons Foundation (https://scons.org)
+SPDX-License-Identifier: MIT
+SPDX-FileType: DOCUMENTATION
+
+This file is processed by the bin/SConsDoc.py module.
+-->
+
+<!DOCTYPE sconsdoc [
+    <!ENTITY % scons SYSTEM "../scons.mod">
+    %scons;
+
+    <!ENTITY % builders-mod SYSTEM "../generated/builders.mod">
+    %builders-mod;
+    <!ENTITY % functions-mod SYSTEM "../generated/functions.mod">
+    %functions-mod;
+    <!ENTITY % tools-mod SYSTEM "../generated/tools.mod">
+    %tools-mod;
+    <!ENTITY % variables-mod SYSTEM "../generated/variables.mod">
+    %variables-mod;
+]>
+
+<section id="sect-parseconfig"
+         xmlns="http://www.scons.org/dbxsd/v1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.scons.org/dbxsd/v1.0 http://www.scons.org/dbxsd/v1.0/scons.xsd">
+<title>Finding Installed Library Information: the &ParseConfig; Function</title>
+
+<para>
+
+ Configuring the right options to build programs to work with
+ libraries--especially shared libraries--that are available
+ on POSIX systems can be complex.
+ To help this situation,
+ various utilities with names that end in <filename>config</filename>
+ return the command-line options for the GNU Compiler Collection (GCC)
+ that are needed to build and link against those libraries;
+ for example, the command-line options
+ to use a library named <filename>lib</filename>
+ could be found by calling a utility named <command>lib-config</command>.
+
+ </para>
+
+ <para>
+
+ A more recent convention is that these options
+ are available through the generic <command>pkg-config</command> program,
+ providing a common framework, error handling, and the like,
+ so that all the package creator has to do is provide the set of strings
+ for his particular package.
+
+ </para>
+
+ <para>
+
+ &SCons; &consenvs; have a &f-link-ParseConfig;
+ method that asks the host system to execute a command
+ and then configures the appropriate &consvars; based on
+ the output of that command.
+ This lets you run a program like <command>pkg-config</command>
+ or a more specific utility to help set up your build.
+
+ </para>
+
+ <scons_example name="parseconfig_ex1">
+   <file name="SConstruct" printme="1">
+env = Environment()
+env['CPPPATH'] = ['/lib/compat']
+env.ParseConfig("pkg-config x11 --cflags --libs")
+print("CPPPATH:", env['CPPPATH'])
+   </file>
+ </scons_example>
+
+ <para>
+
+ &SCons; will execute the specified command string,
+ parse the resultant flags,
+ and add the flags to the appropriate environment variables.
+
+ </para>
+
+ <!--
+ This is how we used to generate the screen output below, but
+ as of (at least) Ubuntu Karmic, the pkg-config output for x11
+ no longer reports back an include directory.  Since this is just
+ for example anyway, we're just hard-coding the output.
+
+ <scons_output example="parseconfig_ex1" suffix="1">
+    <scons_output_command>scons -Q</scons_output_command>
+ </scons_output>
+ -->
+
+ <screen>
+% <userinput>scons -Q</userinput>
+CPPPATH: ['/lib/compat', '/usr/X11/include']
+scons: `.' is up to date.
+ </screen>
+
+ <para>
+
+ In the example above, &SCons; has added the include directory to
+ &cv-link-CPPPATH;
+ (depending on what other flags are emitted by the
+ <filename>pkg-config</filename> command,
+ other variables may have been extended as well.)
+
+ </para>
+
+ <para>
+
+ Note that the options are merged with existing options using
+ the &f-link-MergeFlags; method,
+ so that each option only occurs once in the &consvar;.
+
+ </para>
+
+ <scons_example name="parseconfig_ex2">
+   <file name="SConstruct" printme="1">
+env = Environment()
+env.ParseConfig("pkg-config x11 --cflags --libs")
+env.ParseConfig("pkg-config x11 --cflags --libs")
+print("CPPPATH:", "CPPPATH:", env['CPPPATH'])
+   </file>
+ </scons_example>
+
+ <!--
+ This is how we used to generate the screen output below, but
+ as of (at least) Ubuntu Karmic, the pkg-config output for x11
+ no longer reports back an include directory.  Since this is just
+ for example anyway, we're just hard-coding the output.
+
+ <scons_output example="parseconfig_ex2" suffix="1">
+    <scons_output_command>scons -Q</scons_output_command>
+ </scons_output>
+ -->
+
+ <screen>
+% <userinput>scons -Q</userinput>
+CPPPATH: ['/usr/X11/include']
+scons: `.' is up to date.
+ </screen>
+
+</section>

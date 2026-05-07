@@ -1,0 +1,17 @@
+# Dependencies for packaging, and distribution, including the docs build
+
+-r requirements-dev.txt
+
+# Check if the README.rst will render o.k. on pypi and not block an upload
+# Can be used with twinecheck
+# See: https://github.com/pypa/readme_renderer
+readme-renderer
+
+# sphinx pinned because it has broken several times on new releases
+sphinx
+sphinx-book-theme
+rst2pdf
+
+build
+twine
+packaging

@@ -1,0 +1,497 @@
+<?xml version='1.0'?>
+
+<!--
+SPDX-FileCopyrightText: Copyright The SCons Foundation (https://scons.org)
+SPDX-License-Identifier: MIT
+SPDX-FileType: DOCUMENTATION
+
+This file is processed by the bin/SConsDoc.py module.
+-->
+
+<!DOCTYPE sconsdoc [
+
+    <!ENTITY % version SYSTEM "../version.xml">
+    %version;
+
+    <!ENTITY % scons SYSTEM "../scons.mod">
+    %scons;
+
+    <!ENTITY % builders-mod SYSTEM "../generated/builders.mod">
+    %builders-mod;
+    <!ENTITY % functions-mod SYSTEM "../generated/functions.mod">
+    %functions-mod;
+    <!ENTITY % tools-mod SYSTEM "../generated/tools.mod">
+    %tools-mod;
+    <!ENTITY % variables-mod SYSTEM "../generated/variables.mod">
+    %variables-mod;
+
+]>
+
+<chapter id="chap-build-install"
+         xmlns="http://www.scons.org/dbxsd/v1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.scons.org/dbxsd/v1.0 http://www.scons.org/dbxsd/v1.0/scons.xsd">
+
+<title>Building and Installing &SCons;</title>
+
+  <para>
+
+  This chapter will take you through the basic steps
+  of installing &SCons; so you can use it for your projects.
+  Before that, however, this chapter will also describe the basic steps
+  involved in installing &Python; on your system,
+  in case that is necessary.
+  Fortunately, both &SCons; and &Python;
+  are easy to install on almost any system,
+  and &Python; already comes installed on many systems.
+
+  </para>
+
+  <!--
+
+  <para>
+
+  Lastly, this chapter also contains a section that
+  provides a brief overview of the &Python; programming language,
+  which is the language used to implement &SCons;,
+  and which forms the basis of the &SCons; configuration files.
+  Becoming familiar with some &Python; concepts will make it easier
+  to understand many of the examples in this User's Guide.
+  Nevertheless, it <emphasis>is</emphasis> possible
+  to configure simple &SCons; builds without knowing &Python;,
+  so you can skip this section if you
+  want to dive in and pick up things
+  by example- -or, of course, if you are
+  already familiar with &Python;.
+
+  </para>
+
+  -->
+
+  <section id="sect-install-python">
+  <title>Installing Python</title>
+
+    <para>
+    Because &SCons; is written in the &Python; programming language,
+    you need to have a &Python; interpreter available on your system
+    to use &SCons;.
+    Before you try to install &Python;,
+    check to see if &Python; is already
+    available on your system  by typing
+    <userinput>python -V</userinput>
+    (capital 'V')
+    or
+    <userinput>python --version</userinput>
+    at your system's command-line prompt.
+    For Linux/Unix/MacOS/BSD type systems this looks like:
+    </para>
+
+    <screen>
+$ <userinput>python -V</userinput>
+Python 3.9.15
+    </screen>
+
+    <para>
+    If you get a version like 2.7.x, you may need to try using the
+    name <command>python3</command> - current &SCons; no longer
+    works with &Python; 2.
+    </para>
+
+    <para>
+    Note to Windows users: there are a number of different ways &Python;
+    can be installed or invoked on Windows, it is beyond the scope
+    of this guide to unravel all of them. Some have an additional
+    program called the <firstterm>Python launcher</firstterm> (described,
+    somewhat technically, in
+    <ulink url="https://www.python.org/dev/peps/pep-0397/">PEP 397</ulink>):
+    try using the command name <command>py</command> instead of
+    <command>python</command>, if that is not available drop
+    back to trying <command>python</command>
+    </para>
+
+    <screen>
+C:\><userinput>py -V</userinput>
+Python 3.9.15
+    </screen>
+
+    <para>
+    If &Python; is not installed on your system,
+    or is not findable in the current search path,
+    you will see an error message
+    stating something like <computeroutput>"command not found"</computeroutput>
+    (on UNIX or Linux)
+    or <computeroutput>"'python' is not recognized as an internal
+    or external command, operable program or batch file"</computeroutput>
+    (on Windows <command>cmd</command>).
+    In that case, you need to either install &Python;
+    or fix the search path
+    before you can install &SCons;.
+    </para>
+
+    <para>
+    The link for downloading &Python; installers (Windows and Mac)
+    from the project's own website is:
+    <ulink url="https://www.python.org/download">https://www.python.org/download</ulink>.
+    There are useful system-specific entries on setup and
+    usage to be found at:
+    <ulink url="https://docs.python.org/3/using">https://docs.python.org/3/using</ulink>
+    </para>
+
+    <para>
+    For Linux systems, &Python; is
+    almost certainly available as a supported package, probably
+    installed by default; this is often preferred over installing
+    by other means as the system package will be built with
+    carefully chosen optimizations, and will be kept up to date
+    with bug fixes and security patches. In fact, the &Python;
+    project itself does not build installers for Linux for this reason.
+    Many such systems have separate packages for
+    &Python; 2 and &Python; 3 - make sure the &Python; 3 package is
+    installed, as the latest &SCons; requires it.
+    Building from source may still be a
+    useful option if you need a specific version that is not offered by
+    the distribution you are using.
+    </para>
+
+    <para>
+    Recent versions of the Mac no longer come with &Python;
+    pre-installed; older versions came with a rather out-of-date
+    version (based on &Python; 2.7) which is insufficient to run
+    current &SCons;.
+    The python.org installer can be used on the Mac, but there are
+    also other sources such as MacPorts and Homebrew.
+    The Anaconda installation also comes with a bundled &Python;.
+    </para>
+
+    <para>
+    Windows has even more choices.  The Python.org installer is
+    a traditional <filename>.exe</filename> style;
+    the same software is also released as a Windows application through
+    the Microsoft Store.  Several alternative builds also exist
+    such as Chocolatey and ActiveState, and, again,
+    a version of Python comes with Anaconda.
+    </para>
+
+    <para>
+    &SCons; will work with &Python; 3.7 or later.
+    If you need to install &Python; and have a choice,
+    we recommend using the most recent &Python; version available.
+    Newer &Python; versions have significant improvements
+    that help speed up the performance of &SCons;.
+    </para>
+
+  </section>
+
+  <section id="sect-install-scons">
+  <title>Installing &SCons;</title>
+
+    <para>
+    The recommended way to install &SCons; is from the &Python; Package
+    Index (<ulink url="https://pypi.org/project/SCons/">PyPI</ulink>):
+    </para>
+
+    <screen>
+% <userinput>python -m pip install scons</userinput>
+    </screen>
+
+    <para>
+    If you prefer not to install to the &Python; system location,
+    or do not have privileges to do so, you can add a flag to install
+    to a location specific to your own account and &Python; version:
+    </para>
+
+    <screen>
+% <userinput>python -m pip install --user scons</userinput>
+    </screen>
+
+    <para>
+    For those users using Anaconda or Miniconda, use the
+    <command>conda</command> installer instead, so the &scons;
+    install location will match the version of &Python; that
+    system will be using. For example:
+    </para>
+
+    <screen>
+% <userinput>conda install -c conda-forge scons</userinput>
+    </screen>
+
+    <para>
+    If you need a specific
+    version of &SCons; that is different from the current version,
+    <systemitem>pip</systemitem> has a version option
+    (e.g. <userinput>python -m pip install scons==3.1.2</userinput>),
+    or you can follow the instructions in the following sections.
+    </para>
+
+    <para>
+    &SCons; does comes pre-packaged for installation on many Linux systems.
+    Check your package installation system
+    to see if there is an up-to-date &SCons; package available.
+    Many people prefer to install distribution-native packages if available,
+    as they provide a central point for management and updating;
+    however not all distributions update in a timely fashion.
+    During the still-ongoing &Python; 2 to 3 transition,
+    some distributions may still have two &SCons; packages available,
+    one which uses &Python; 2 and one which uses &Python; 3.  Since
+    the latest &scons; only runs on &Python; 3, to get the current version
+    you should choose the &Python; 3 package.
+    </para>
+
+  </section>
+
+  <section id="sect-scons-no-install">
+  <title>Using &SCons; Without Installing</title>
+
+    <para>
+    You don't actually need to "install" &SCons; to use it.
+    Nor do you need to "build" it, unless you are interested in
+    producing the &SCons; documentation, which does use several
+    tools to produce HTML, PDF and other output formats from
+    files in the source tree.
+    All you need to do is
+    call the <filename>scons.py</filename> driver script in a
+    location that contains an &SCons; tree, and it will figure out
+    the rest. You can test that like this:
+    </para>
+
+    <screen>
+$ <userinput>python <replaceable>/path/to/unpacked</replaceable>/scripts/scons.py --version</userinput>
+    </screen>
+
+    <para>
+    To make use of an uninstalled &SCons;,
+    the first step is to download either the
+    <filename>scons-&buildversion;.tar.gz</filename>
+    or <filename>scons-&buildversion;.zip</filename>,
+    which are available from the SCons download page at
+    <ulink url="https://scons.org/pages/download.html">https://scons.org/pages/download.html</ulink>.
+    There is also a <literal>scons-local</literal> bundle you can make
+    use of.  It is arranged a little bit differently, with the idea
+    that you can include it with your own project if you want people
+    to be able to do builds without having to download or install &SCons;.
+    Finally, you can also use a checkout of the git tree from GitHub
+    at a location to point to.
+    </para>
+
+    <para>
+    Unpack the archive you downloaded,
+    using a utility like <application>tar</application>
+    on Linux or UNIX,
+    or <application>WinZip</application> on Windows.
+    This will create a directory called
+    <filename>scons-&buildversion;</filename>,
+    usually in your local directory.  The driver script
+    will be in a subdirectory named <filename>scripts</filename>,
+    unless you are using <literal>scons-local</literal>,
+    in which case it will be in the top directory.
+    Now you only need to call <filename>scons.py</filename> by
+    giving a full or relative path to it in order to use that
+    &SCons; version.
+    </para>
+
+    <para>
+    Note that instructions for older versions may have suggested
+    running <userinput>python setup.py install</userinput> to
+    "build and install" &SCons;. This is no longer recommended
+    (in fact, it is not recommended by the wider &Python; packaging
+    community for <emphasis>any</emphasis> end-user installations
+    of &Python; software). There is a <filename>setup.py</filename> file,
+    but it is only tested and used for the automated procedure which
+    prepares  an &SCons; bundle for making a release on PyPI,
+    and even that is not guaranteed to work in the future.
+    </para>
+
+  </section>
+
+  <section id="sect-install-scons-multi">
+  <title>Running Multiple Versions of &SCons; Side-by-Side</title>
+
+      <para>
+      In some cases you may need several versions of &SCons;
+      present on a system at the same time - perhaps you have
+      an older project to build that has not yet been "ported"
+      to a newer &SCons; version, or maybe you want to test a
+      new &SCons; release side-by-side with a previous one
+      before switching over.
+      The use of an "uninstalled" package as described in the
+      previous section can be of use for this purpose.
+      </para>
+
+      <para>
+      Another approach to multiple versions is to create
+      &Python; virtualenvs, and install different &SCons; versions in each.
+      A Python <firstterm>virtual environment</firstterm>
+      is a directory with an isolated set of Python packages,
+      where packages you install/upgrade/remove inside the
+      environment do not affect anything outside it,
+      and those you install/upgrade/remove outside of it
+      do not affect anything inside it.
+      In other words, anything you do with <command>pip</command>
+      in the environment stays in that environment.
+      The &Python; standard library provides a module called
+      <systemitem>venv</systemitem> for creating these
+      (<ulink url="https://docs.python.org/e/library/venv.html"/>),
+      although there are also other tools which provide more precise
+      control of the setup.
+      </para>
+
+      <para>
+      Using a virtualenv can be useful even for a single version of
+      &SCons;, to gain the advantages of having an isolated environment.
+      It also gets around the problem of not having administrative
+      privileges on a particular system to install a distribution
+      package or use <command>pip</command> to install to a
+      system location, as the virtualenv is completely under your control.
+      </para>
+
+      <para>
+      The following outline shows how this could be set up
+      on a Linux/POSIX system (the syntax will be a bit different
+      on Windows):
+      </para>
+
+      <screen>
+$ <emphasis>create virtualenv named scons3</emphasis>
+$ <emphasis>create virtualenv named scons4</emphasis>
+$ <userinput>source scons3/bin/activate</userinput>
+$ <userinput>pip install scons==3.1.2</userinput>
+$ <userinput>deactivate</userinput>
+$ <userinput>source scons4/bin/activate</userinput>
+$ <userinput>pip install scons</userinput>
+$ <userinput>deactivate</userinput>
+$ <emphasis>activate a virtualenv and run 'scons' to use that version</emphasis>
+      </screen>
+
+  </section>
+
+  <!--
+
+  <section id="sect-python-basics">
+  <title>Python Basics</title>
+
+    <para>
+
+    This section will provide a brief overview of
+    the Python programming language.
+    Skip this section if you are already familiar with Python
+    (or you're really intent on diving into &SCons;
+    and just picking up things as you go).
+
+    </para>
+
+    <para>
+
+    Python has a lot of good
+    documentation freely available on-line
+    to help you get started.
+    The standard tutorial is available at XXX.
+
+
+    </para>
+
+    <para>
+
+    Python is very easy to pick up.
+
+    </para>
+
+    <para>
+
+    Python variables must be assigned to before they can be referenced.
+
+    </para>
+
+    <para>
+
+    Assignment is like most programming languages:
+
+    x = 1 + 2
+    z = 3 * x
+
+    </para>
+
+    <para>
+
+    Function calls look like most language function calls:
+
+    a = f(g)
+
+    </para>
+
+    <para>
+
+    Define functions like so:
+
+        def func(arg1, arg2):
+            return arg1 * arg 2
+
+    The number of parameters
+
+    </para>
+
+    <para>
+
+    Strings can be enclosed in single quotes or double quotes,
+    backslashes are used to escape characters,
+    triple-quote syntax lets you include quotes and newlines,
+    raw strings begin with 'r'.
+
+    </para>
+
+    <para>
+
+    Lists are enclosed in square brackets,
+    list items are separated by commas.
+    List references use square brackets and integer index values,
+    slice notation lets you select, delete or replace a range.
+
+    </para>
+
+    <para>
+
+    Dictionaries (hashes) are enclosed in curly brackets,
+    : separates keys from values,
+    , separates items.
+    Dictionary values are referenced using square brackets.
+
+    </para>
+
+    <para>
+
+    Access class attributes (including methods) using a '.'.
+
+    </para>
+
+    <para>
+
+    if: statements look like
+
+    elif: statements look like
+
+    else: statements look like
+
+    </para>
+
+    <para>
+
+    for: statements look like
+
+    while: statements look like
+
+    break statements look like
+
+    continue statements look like
+
+    </para>
+
+    <para>
+
+    pass
+
+    </para>
+
+  </section>
+
+  -->
+
+</chapter>
