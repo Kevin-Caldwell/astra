@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+
+<!--
+SPDX-FileCopyrightText: Copyright The SCons Foundation (https://scons.org)
+SPDX-License-Identifier: MIT
+SPDX-FileType: DOCUMENTATION
+
+This file is processed by the bin/SConsDoc.py module.
+-->
+
+<!DOCTYPE sconsdoc [
+    <!ENTITY % scons SYSTEM "../scons.mod">
+    %scons;
+
+    <!ENTITY % builders-mod SYSTEM "../generated/builders.mod">
+    %builders-mod;
+    <!ENTITY % functions-mod SYSTEM "../generated/functions.mod">
+    %functions-mod;
+    <!ENTITY % tools-mod SYSTEM "../generated/tools.mod">
+    %tools-mod;
+    <!ENTITY % variables-mod SYSTEM "../generated/variables.mod">
+    %variables-mod;
+
+]>
+
+<appendix id="app-ant"
+          xmlns="http://www.scons.org/dbxsd/v1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.scons.org/dbxsd/v1.0 http://www.scons.org/dbxsd/v1.0/scons.xsd">
+<title>Converting From Ant</title>
+
+<!-- TOOD: placeholder file, not currently included in build -->
+
+ <para>
+
+   XXX
+
+ </para>
+
+ <section id="sect-ant-diff">
+ <title>Differences Between &Ant; and &SCons;</title>
+
+   <para>
+
+   XXX
+
+   </para>
+
+ </section>
+
+ <section id="sect-ant-adv">
+ <title>Advantages of &SCons; Over &Ant;</title>
+
+   <para>
+
+   XXX
+
+   </para>
+
+ </section>
+
+</appendix>

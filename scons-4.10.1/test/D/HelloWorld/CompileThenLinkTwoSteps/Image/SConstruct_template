@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+#
+# Copyright The SCons Foundation
+
+import os
+
+DefaultEnvironment(tools=[])
+environment = Environment(tools=['link', '{}'])
+objects = environment.Object('helloWorld.d')
+environment.Program('helloWorld', objects)

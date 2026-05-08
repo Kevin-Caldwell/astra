@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+
+<!--
+SPDX-FileCopyrightText: Copyright The SCons Foundation (https://scons.org)
+SPDX-License-Identifier: MIT
+SPDX-FileType: DOCUMENTATION
+
+This file is processed by the bin/SConsDoc.py module.
+-->
+
+<!DOCTYPE sconsdoc [
+
+    <!ENTITY % version SYSTEM "../version.xml">
+    %version;
+
+    <!ENTITY % scons SYSTEM "../scons.mod">
+    %scons;
+
+    <!ENTITY % builders-mod SYSTEM "../generated/builders.mod">
+    %builders-mod;
+    <!ENTITY % functions-mod SYSTEM "../generated/functions.mod">
+    %functions-mod;
+    <!ENTITY % tools-mod SYSTEM "../generated/tools.mod">
+    %tools-mod;
+    <!ENTITY % variables-mod SYSTEM "../generated/variables.mod">
+    %variables-mod;
+
+]>
+
+<book xmlns="http://www.scons.org/dbxsd/v1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.scons.org/dbxsd/v1.0 http://www.scons.org/dbxsd/v1.0/scons.xsd">
+  <bookinfo>
+    <title>SCons &buildversion;</title>
+    <subtitle>User Guide</subtitle>
+
+    <corpauthor>The SCons Development Team</corpauthor>
+
+    <pubdate>Released: Sun, 16 Nov 2025 10:51:57 -0700</pubdate>
+
+    <copyright>
+        <year>2004 - 2025</year>
+        <holder>The SCons Foundation</holder>
+    </copyright>
+
+    <releaseinfo>Version &buildversion;</releaseinfo>
+
+    <mediaobject role="cover"><imageobject><imagedata fileref="cover.jpg" format="JPG"/></imageobject></mediaobject>
+  </bookinfo>
+
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="preface.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="build-install.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="simple.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="less-simple.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="libraries.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="nodes.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="depends.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="environments.xml"/>
+
+  <chapter id="chap-manip-options">
+    <title>Automatically Putting Command-line Options into their Construction Variables</title>
+    <!-- TODO:  combine this into a chapter document.
+    This intro paragraph should describe at a high-level
+    what these things do.  People are likely to use the intro as a
+    (brief) overview of *what* these functions do to decide if this
+    chapter is where they should read in more detail.  -->
+    <para>
+    This chapter describes the &MergeFlags;, &ParseFlags;, and &ParseConfig;
+    methods of a &consenv;, as well as the <parameter>parse_flags</parameter>
+    keyword argument to methods that construct environments.
+    </para>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="mergeflags.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="parse_flags_arg.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="parseflags.xml"/>
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="parseconfig.xml"/>
+  </chapter>
+
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="output.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="command-line.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="install.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="factories.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="file-removal.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="hierarchy.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="separate.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="repositories.xml"/>
+  <!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="builders-built-in.xml"/> -->
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="builders-writing.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="builders-commands.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="add-method.xml"/>
+  <!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="actions.xml"/> -->
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="scanners.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="sconf.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="caching.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="alias.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="java.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="gettext.xml"/>
+  <!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="run.xml"/> -->
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="misc.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="external.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="troubleshoot.xml"/>
+
+  <!--   Appendix below here -->
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="variables.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="builders.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tools.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="functions.xml"/>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="tasks.xml"/>
+
+  <!-- These sections are only sekeletons: -->
+  <!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="python.xml"/> -->
+  <!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="example.xml"/> -->
+  <!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="make.xml"/> -->
+  <!-- <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="ant.xml"/> -->
+
+</book>

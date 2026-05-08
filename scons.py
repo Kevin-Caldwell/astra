@@ -41,6 +41,10 @@ __developer__ = "__DEVELOPER__"
 import os
 import sys
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
+sys.path.append('scons-4.10.1')
+
 # Python compatibility check
 if sys.version_info < (3, 7, 0):
     msg = "scons: *** SCons version %s does not run under Python version %s.\n\

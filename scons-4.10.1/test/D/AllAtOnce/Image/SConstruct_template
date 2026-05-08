@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+#
+# Copyright The SCons Foundation
+
+import os
+
+DefaultEnvironment(tools=[])
+environment = Environment(
+    tools=['{}', 'link'],
+)
+
+environment.ProgramAllAtOnce(
+    'project',
+    [
+        'main.d',
+        'amod.d',
+        'bmod.d',
+    ],
+)

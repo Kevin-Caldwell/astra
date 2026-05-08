@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<!--
+SPDX-FileCopyrightText: Copyright The SCons Foundation (https://scons.org)
+SPDX-License-Identifier: MIT
+SPDX-FileType: DOCUMENTATION
+
+This file is processed by the bin/SConsDoc.py module.
+-->
+
+<!DOCTYPE sconsdoc [
+<!ENTITY % scons SYSTEM '../../doc/scons.mod'>
+%scons;
+<!ENTITY % builders-mod SYSTEM '../../doc/generated/builders.mod'>
+%builders-mod;
+<!ENTITY % functions-mod SYSTEM '../../doc/generated/functions.mod'>
+%functions-mod;
+<!ENTITY % tools-mod SYSTEM '../../doc/generated/tools.mod'>
+%tools-mod;
+<!ENTITY % variables-mod SYSTEM '../../doc/generated/variables.mod'>
+%variables-mod;
+]>
+
+<sconsdoc xmlns="http://www.scons.org/dbxsd/v1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.scons.org/dbxsd/v1.0 http://www.scons.org/dbxsd/v1.0/scons.xsd">
+
+<tool name="yacc">
+<summary>
+<para>
+Sets construction variables for the &yacc; parser generator.
+</para>
+</summary>
+<sets>
+<item>YACC</item>
+<item>YACCFLAGS</item>
+<item>YACCCOM</item>
+<item>YACCHFILESUFFIX</item>
+<item>YACCHXXFILESUFFIX</item>
+<item>YACCVCGFILESUFFIX</item>
+<item>YACC_GRAPH_FILE_SUFFIX</item>
+</sets>
+<uses>
+<item>YACCCOMSTR</item>
+<item>YACCFLAGS</item>
+<item>YACC_HEADER_FILE</item>
+<item>YACC_GRAPH_FILE</item>
+</uses>
+</tool>
+
+<cvar name="YACC">
+<summary>
+<para>
+The parser generator.
+</para>
+</summary>
+</cvar>
+
+<cvar name="YACCCOM">
+<summary>
+<para>
+The command line used to call the parser generator
+to generate a source file.
+</para>
+</summary>
+</cvar>
+
+<cvar name="YACCCOMSTR">
+<summary>
+<para>
+The string displayed when generating a source file
+using the parser generator.
+If this is not set, then &cv-link-YACCCOM; (the command line) is displayed.
+</para>
+
+<example_commands>
+env = Environment(YACCCOMSTR="Yacc'ing $TARGET from $SOURCES")
+</example_commands>
+</summary>
+</cvar>
+
+<cvar name="YACCFLAGS">
+<summary>
+<para>
+General options passed to the parser generator.
+In addition to passing the value on during invocation,
+the &t-link-yacc; tool also examines this &consvar; for options
+which cause additional output files to be generated,
+and adds those to the target list.
+</para>
+
+<para>
+If the <option>-d</option> option is present in &cv-YACCFLAGS;
+&scons; assumes that the call will also create a header file
+with the suffix defined by &cv-link-YACCHFILESUFFIX;
+if the yacc source file ends in a <filename>.y</filename> suffix,
+or a file with the suffix defined by &cv-link-YACCHXXFILESUFFIX;
+if the yacc source file ends in a <filename>.yy</filename> suffix.
+The header will have the same base name as the requested target.
+This is only correct if the executable is <command>bison</command>
+(or <command>win_bison</command>).
+If using Berkeley yacc (<command>byacc</command>),
+<filename>y.tab.h</filename> is always written -
+avoid the <option>-d</option> in this case and
+use &cv-link-YACC_HEADER_FILE; instead.
+</para>
+
+<para>
+If a <option>-g</option> option is present,
+&scons; assumes that the call will also create a graph file
+with the suffix defined by &cv-link-YACCVCGFILESUFFIX;.
+</para>
+
+<para>
+If a <option>-v</option> option is present,
+&scons; assumes that the call will also create an output debug file
+with the suffix <filename>.output</filename>.
+</para>
+
+<para>
+Also recognized are GNU &bison; options
+<option>--header</option>
+(and its deprecated synonym <option>--defines</option>),
+which is similar to
+<option>-d</option>
+but gives the option to explicitly name the output header file
+through an option argument;
+and <option>--graph</option>,
+which is similar to
+<option>-g</option>
+but gives the option to explicitly name the output graph file
+through an option argument.
+The file suffixes described for
+<option>-d</option> and <option>-g</option> above
+are not applied if these are used in the option=argument form.
+</para>
+
+<para>
+Note that files specified by <option>--header=</option> and
+<option>--graph=</option> may not be properly handled
+by &SCons; in all situations, and using those in &cv-YACCFLAGS;
+should be considered legacy support only.
+Consider using &cv-link-YACC_HEADER_FILE;
+and &cv-link-YACC_GRAPH_FILE; instead
+if the files need to be explicitly named
+(<emphasis>new in version 4.4.0</emphasis>).
+</para>
+</summary>
+</cvar>
+
+<cvar name="YACC_HEADER_FILE">
+<summary>
+<para>
+If supplied, generate a header file with the name taken from this variable.
+Will be emitted as a <option>--header=</option>
+command-line option. Use this in preference to including
+<option>--header=</option> in &cv-link-YACCFLAGS; directly.
+</para>
+<para><emphasis>New in version 4.4.0.</emphasis></para>
+</summary>
+</cvar>
+
+<cvar name="YACC_GRAPH_FILE">
+<summary>
+<para>
+If supplied, write a graph of the automaton to a file with the name
+taken from this variable.
+Will be emitted as a <option>--graph=</option>
+command-line option. Use this in preference to including
+<option>--graph=</option> in &cv-link-YACCFLAGS; directly.
+</para>
+<para><emphasis>New in version 4.4.0.</emphasis></para>
+</summary>
+</cvar>
+
+<cvar name="YACCHFILESUFFIX">
+<summary>
+<para>
+The suffix of the C
+header file generated by the parser generator
+when the <option>-d</option> option
+(or <option>--header</option> without an option-argument)
+is used in &cv-link-YACCFLAGS;.
+Note that setting this variable informs &SCons;
+how to construct the header filename for tracking purposes,
+it does not affect the actual generated filename.
+Set this to match what your parser generator produces.
+The default value is
+<filename>.h</filename>.
+</para>
+</summary>
+</cvar>
+
+<cvar name="YACCHXXFILESUFFIX">
+<summary>
+<para>
+The suffix of the C++
+header file generated by the parser generator
+when the <option>-d</option> option
+(or <option>--header</option> without an option-argument)
+is used in &cv-link-YACCFLAGS;.
+Note that setting this variable informs &SCons;
+how to construct the header filename for tracking purposes,
+it does not affect the actual generated filename.
+Set this to match what your parser generator produces.
+The default value is <filename>.hpp</filename>.
+</para>
+</summary>
+</cvar>
+
+<cvar name="YACCVCGFILESUFFIX">
+<summary>
+<para>
+Obsoleted. Use &cv-link-YACC_GRAPH_FILE_SUFFIX; instead.
+The value is used only if &cv-YACC_GRAPH_FILE_SUFFIX; is not set.
+The default value is <filename>.gv</filename>.
+</para>
+<para>
+<emphasis>Changed in version 4.6.0</emphasis>: deprecated. The default value
+changed from <filename>.vcg</filename> (&bison; stopped generating
+<filename>.vcg</filename> output with version 2.4, in 2006).
+</para>
+</summary>
+</cvar>
+
+<cvar name="YACC_GRAPH_FILE_SUFFIX">
+<summary>
+<para>
+Previously specified by &cv-link-YACCVCGFILESUFFIX;.
+</para>
+<para>
+The suffix of the file
+containing a graph of the grammar automaton
+when the <option>-g</option> option
+(or <option>--graph=</option> without an option-argument)
+is used in &cv-link-YACCFLAGS;.
+Note that setting this variable informs &SCons;
+how to construct the graph filename for tracking purposes,
+it does not affect the actual generated filename.
+Various yacc tools have emitted various formats
+at different times.
+Set this to match what your parser generator produces.
+</para>
+<para><emphasis>New in version 4.6.0</emphasis>. </para>
+</summary>
+</cvar>
+
+</sconsdoc>
