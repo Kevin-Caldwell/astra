@@ -1,5 +1,15 @@
+.venv
+
 *.log
 transcript
 *.wlf
+
 work/**
-.venv
+hw/work
+temp
+
+.sconsign.dblite
+modelsim.ini
+
+qrun.out
+build
