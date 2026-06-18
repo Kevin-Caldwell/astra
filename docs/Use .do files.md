@@ -1,7 +1,7 @@
 # Do Files
 
-Do files are meant to script compilation, setup, 
-and execution of simulations in HDL through 
+Do files are meant to script compilation, setup,
+and execution of simulations in HDL through
 Questa.
 
 ## Creating a work library
