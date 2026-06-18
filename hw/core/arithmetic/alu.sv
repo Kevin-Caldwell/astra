@@ -1,11 +1,6 @@
 
 `include "defs.sv"
 
-typedef struct packed {
-  logic Z; // Equal
-  logic N; // Is result negative?
-} ALUFlags;
-
 module SetFlags (
   input logic[XLEN-1:0] in,
   output ALUFlags flags
@@ -31,11 +26,11 @@ module ALU (
     case (op)
       3'b000: out = a + b;
       3'b001: out = a << b;
-      3'b010: // set less than
-      3'b011: // set less than unsigned
+      3'b010: out = 32'b0;// set less than
+      3'b011: out = 32'b0;// set less than unsigned
       3'b100: out = a ^ b;
       3'b101: out = a >> b; // srl funct7: 00000
-      3'b101: // sra funct7: 01000
+      3'b101: out = 32'b0;// sra funct7: 01000
       3'b110: out = a | b;
       3'b111: out = a & b;
       default: out = 32'd0;

@@ -4,17 +4,17 @@ typedef struct packed {
   logic N; // Negative?
 } ALUFlags;
 
-typedef enum logic[1:0] { 
-  kComparatorEqual          = 3'b00, 
+typedef enum logic[1:0] {
+  kComparatorEqual          = 3'b00,
   kComparatorNotEqual       = 3'b01,
   kComparatorLessThan       = 3'b10,
-  kComparatorGreaterEqual   = 3'b11,
+  kComparatorGreaterEqual   = 3'b11
 } Comparators;
 
 module CalculateComparator(
   input en,
-  input ALUFlags flags, 
-  input logic[1:0] compare_op, 
+  input ALUFlags flags,
+  input logic[1:0] compare_op,
   output logic out
 );
   always_comb begin

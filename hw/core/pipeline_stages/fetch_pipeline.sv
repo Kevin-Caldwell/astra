@@ -1,8 +1,6 @@
 `include "core/pipeline_stages/pipeline_signals.sv"
 
-`if (defined(SIM)) begin
-  `include "memory/flash_bank_sim.sv"
-end
+`include "memory/flash_bank_sim.sv"
 
 module fetch_pipeline (
   input logic clk, resetn,

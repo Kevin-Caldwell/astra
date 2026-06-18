@@ -1,3 +1,5 @@
+`ifndef __HW_DEFS_SV
+`define __HW_DEFS_SV
 
 parameter int XLEN = 32;
 parameter int REG_COUNT = 32;
@@ -6,6 +8,11 @@ typedef logic[4:0] reg_addr_t;
 typedef reg_addr_t reg_t;
 typedef logic[XLEN-1:0] bus_t;
 typedef logic[XLEN-1:0] instr_t;
+
+typedef struct packed {
+  logic Z; // Equal
+  logic N; // Is result negative?
+} ALUFlags;
 
 typedef enum logic[1:0] {
   R_INSTRUCTION,
@@ -53,3 +60,5 @@ typedef union packed {
   sInstruction_s s_inst;
   uInstruction_s u_inst;
 } instr_u;
+
+`endif // __HW_DEFS_SV

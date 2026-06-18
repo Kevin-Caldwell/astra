@@ -1,13 +1,13 @@
 `include "defs.sv"
 `include "riscv/riscv_defs.sv"
 
-enum logic[3:0] {
-  R, 
-  I, 
-  S, 
-  B, 
-  U, 
-  J,
+typedef enum logic[3:0] {
+  R,
+  I,
+  S,
+  B,
+  U,
+  J
 } InstructionType_e;
 
 typedef struct packed {
@@ -35,18 +35,18 @@ endmodule
 
 module DecodeImmediate(
   input instr_t instruction,
-  input InstructionType_e type,
+  input InstructionType_e instr_type,
   output bus_t immediate
 );
 
   always_comb begin
-    case (type)
-      InstructionType_e.R: immediate = 32'd0;
-      InstructionType_e.I: immediate = {20{instruction[instruction[31]]}, instruction[30:20]};
-      InstructionType_e.S: immediate = {21{instruction[31]}, instruction[30:25], instruction[11:8] instruction[7]};
-      InstructionType_e.B: immediate = {20{instruction[31]}, instruction[7], instruction[30:25], instruction[11:8], 1'b0};
-      InstructionType_e.U: immediate = {instruction[31:12], 12'b0};
-      InstructionType_e.J: immediate = {12{instruction[31]}, instruction[19:12], instruction[20], instruction[30:25], instruction[24:21], 1'b0};
+    case (instr_type)
+      R: immediate = 32'd0;
+      I: immediate = {{20{instruction[instruction[31]]}}, instruction[30:20]};
+      S: immediate = {{21{instruction[31]}}, instruction[30:25], instruction[11:8], instruction[7]};
+      B: immediate = {{20{instruction[31]}}, instruction[7], instruction[30:25], instruction[11:8], 1'b0};
+      U: immediate = {instruction[31:12], 12'b0};
+      J: immediate = {{12{instruction[31]}}, instruction[19:12], instruction[20], instruction[30:25], instruction[24:21], 1'b0};
       default: immediate = 32'd0;
     endcase
   end
