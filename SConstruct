@@ -1,8 +1,14 @@
 
 import os
 
+from SCons import Options
+
 WORK_LIB = "work"
 VSIM = "vsim"
+BUILD_DIR = 'build'
+
+RISCV_C_COMPILER =      'riscv64-unknown-elf-gcc'
+RISCV_CXX_COMPILER =    'riscv64-unknown-elf-g++'
 
 def build_design(target, source):
     subprocess.run(["yosys", "-c", f"synth -top {SIM_TOP_MODULE} {SOURCES}"])
@@ -24,16 +30,11 @@ Alias("simulate", simulate_design)
 
 Alias("clean", lambda target, source: print("Cleaning build directory..."))
 
-@Action("all")
-def build_and_test(target, source):
-    simulate_design(target, source)
-    run_tests(target, source)
-
 env = Environment()
 
 build_dir = "build"
 env['BUILD_DIR'] = "build"
 
-
-
 Export('env')
+
+SConscript('SConscript', variant_dir=BUILD_DIR)
