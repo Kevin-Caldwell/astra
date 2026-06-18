@@ -1,5 +1,0 @@
-import os
-os.environ['COVERAGE_PROCESS_START'] = r'$PWD/.coveragerc'
-os.environ['COVERAGE_FILE'] = r'$PWD/.coverage'
-import coverage
-coverage.process_startup()

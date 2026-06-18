@@ -1,2 +1,0 @@
-DefaultEnvironment(tools=[])
-SetOption('warn', 'deprecated-target-signatures')

@@ -1,6 +1,0 @@
-# SPDX-License-Identifier: MIT
-#
-# Copyright The SCons Foundation
-
-DefaultEnvironment(tools=[])
-SConscript("src/SConscript")

@@ -1,1 +1,0 @@
-test/MSVC/msvc.py

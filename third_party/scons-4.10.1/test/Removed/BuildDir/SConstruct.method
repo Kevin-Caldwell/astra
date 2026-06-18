@@ -1,3 +1,0 @@
-DefaultEnvironment(tools=[])
-env = Environment(BUILD='build', SRC='src', tools=[])
-env.BuildDir('build', 'src')
