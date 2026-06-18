@@ -3,6 +3,13 @@ import shutil
 import sys
 
 VSIM_EXE = "/home/kcal/altera_lite/25.1std/questa_fse/bin/vsim"
+VLOG_EXE = "/home/kcal/altera_lite/25.1std/questa_fse/bin/vlog"
+
+sources = [
+    ''
+]
+
+source_path = 'hw'
 
 def run_simulation():
     vsim_path = VSIM_EXE
