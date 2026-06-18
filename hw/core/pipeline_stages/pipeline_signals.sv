@@ -25,25 +25,25 @@ typedef struct packed {
 
 
 typedef struct packed {
-  instr_t instruction,
+  instr_u instr,
   bus_t pc,
 } fetchPipeline_s;
 
 typedef struct packed {
-  instr_t instruction,
+  instr_u instr,
   bus_t pc,
-  logic instruction_type, // EDIT
+  instrType_e instr_type, // EDIT
 } decodePipeline_s;
 
 typedef struct packed {
-  instr_t instruction,
+  instr_u instr,
   bus_t pc,
   bus_t rf_a,
   bus_t rf_b,
 } rfPipeline_s;
 
 typedef struct packed {
-  instr_t instruction,
+  instr_u instr,
   bus_t pc,
   bus_t alu_out,
   ALUFlags alu_flags,
@@ -54,12 +54,12 @@ typedef struct packed {
 } memoryPipeline_s;
 
 typedef struct packed {
-  instr_t instruction,
+  instr_u instr,
   bus_t pc,
 } pcUpdatePipeline_s;
 
 typedef struct packed {
-  instr_t instruction,
+  instr_u instr,
   bus_t pc,
   bus_t new_pc,
   bus_t rf_w,

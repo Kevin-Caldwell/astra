@@ -1,5 +1,4 @@
-
-`define "defs.sv"
+`include "defs.sv"
 
 module ProgramCounterUpdate (
   input logic ctrl_instr, branch_success,
