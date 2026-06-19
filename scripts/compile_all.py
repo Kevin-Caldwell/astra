@@ -10,7 +10,7 @@ def get_sv_files(dir: str):
   return [str(file) for file in Path(dir).rglob("*.sv") if file.is_file()]
 
 def compile_sv_file(file: str):
-  subprocess.run(['vlog', file], check=True)
+  subprocess.run(['vlog', file, '-quiet'], check=True)
 
 def argument_parser():
   parser = argparse.ArgumentParser(
