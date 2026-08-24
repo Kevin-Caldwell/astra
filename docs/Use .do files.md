@@ -12,3 +12,10 @@ a working directory. Required as boilerplate.
 ## Compile Verilog Code
 
 `vlog <verilog_file>` 
+
+
+## Compile binary files into mem files
+
+```perl
+od -An -tx4 -v a.bin > a.mem
+```
