@@ -4,6 +4,10 @@
 parameter int XLEN = 32;
 parameter int REG_COUNT = 32;
 
+`define DEBUG 1 // DEBUG Switch
+`define _DEBUG_HEADER_ `if(DEBUG)
+`define _DEBUG_FOOTER_ `endif(DEBUG)
+
 typedef logic[4:0] reg_addr_t;
 typedef reg_addr_t reg_t;
 typedef logic[XLEN-1:0] bus_t;
