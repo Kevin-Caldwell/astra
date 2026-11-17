@@ -2,7 +2,7 @@
 `include "defs.sv"
 
 module SetFlags (
-  input logic[XLEN-1:0] in,
+  input bus_t in,
   output ALUFlags flags
 );
   always_comb begin
