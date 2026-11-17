@@ -1,4 +1,15 @@
 
+typedef enum logic[3:0] {
+  InstructionType_R,
+  InstructionType_I,
+  InstructionType_S,
+  InstructionType_B,
+  InstructionType_U,
+  InstructionType_J, 
+  InstructionType_EXTRA, 
+  InstructionType_NoImpl
+} InstructionType_e;
+
 typedef struct packed {
   logic register_file;
   logic alu;
@@ -59,4 +70,41 @@ module GetRequiredStages(
       default:  stages = 5'b00000;
     endcase
   end
+endmodule
+
+module FindInstructionType (
+  input logic[4:0] packed_opcode, 
+  output InstructionType_e i_type
+);
+  always_comb begin
+    case (packed_opcode)
+      LOAD:       i_type  = InstructionType_I;
+      STORE:      i_type = InstructionType_S;
+      MADD:       i_type = InstructionType_NoImpl;
+      BRANCH:     i_type = InstructionType_B;
+      LOAD_FP:    i_type = InstructionType_I;
+      STORE_FP:   i_type = InstructionType_S;
+      MSUB:       i_type = InstructionType_NoImpl;
+      JALR:       i_type = InstructionType_I;
+      CUSTOM_0:   i_type = InstructionType_NoImpl;
+      CUSTOM_1:   i_type = InstructionType_NoImpl;
+      NMSUB:      i_type = InstructionType_R;
+      MISC_MEM:   i_type = InstructionType_NoImpl;
+      AMO:        i_type = InstructionType_R;
+      NMADD:      i_type = InstructionType_R;
+      JAL:        i_type = InstructionType_J;
+      OP_IMM:     i_type = InstructionType_I;
+      OP:         i_type = InstructionType_R;
+      OP_FP:      i_type = InstructionType_R;
+      SYSTEM:     i_type = InstructionType_I;
+      AUIPC:      i_type = InstructionType_U;
+      LUI:        i_type = InstructionType_U;
+      OP_V:       i_type = InstructionType_R;
+      OP_VE:      i_type = InstructionType_R;
+      OP_IMM_32:  i_type = InstructionType_I;
+      OP_32:      i_type = InstructionType_R;
+      default:    i_type = InstructionType_NoImpl;
+    endcase
+  end
+  
 endmodule

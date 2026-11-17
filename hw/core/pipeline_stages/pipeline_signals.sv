@@ -6,7 +6,7 @@ typedef struct packed {
   reg_addr_t read_address_a;
   reg_addr_t read_address_b;
   reg_addr_t write_value;
-  logic use_immedate;
+  logic use_immediate;
 
   // ALU
   logic negate;
@@ -32,14 +32,16 @@ typedef struct packed {
 typedef struct packed {
   instr_u instr;
   bus_t pc;
-  instrType_e instr_type; // EDIT
-} decodePipeline_s;
+  instrType_e instr_type;
+} decodeStage_s;
 
 typedef struct packed {
   instr_u instr;
   bus_t pc;
-  bus_t rf_a;
-  bus_t rf_b;
+  bus_t out_a;
+  bus_t out_b;
+  reg_addr_t wb_addr;
+  logic wb_rf;
 } rfPipeline_s;
 
 typedef struct packed {
@@ -47,21 +49,27 @@ typedef struct packed {
   bus_t pc;
   bus_t alu_out;
   ALUFlags alu_flags;
+  reg_addr_t wb_addr;
+  logic wb_rf;
 } aluPipeline_s;
 
 typedef struct packed {
   instr_u instr;
+  reg_addr_t wb_addr;
+  logic wb_rf;
 } memoryPipeline_s;
 
 typedef struct packed {
   instr_u instr;
   bus_t pc;
+  reg_addr_t wb_addr;
+  logic wb_rf;
 } pcUpdatePipeline_s;
 
 typedef struct packed {
   instr_u instr;
   bus_t pc;
   bus_t new_pc;
-  bus_t rf_w;
-  bus_t rf_wb;
+  bus_t wb_addr;
+  bus_t wb_rf;
 } writeBackPipeline_s;

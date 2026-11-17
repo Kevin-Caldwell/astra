@@ -12,6 +12,9 @@ typedef logic[4:0] reg_addr_t;
 typedef reg_addr_t reg_t;
 typedef logic[XLEN-1:0] bus_t;
 typedef logic[XLEN-1:0] instr_t;
+typedef logic[2:0] alu_op_t; 
+
+`define BUS_ZERO 32'b0
 
 typedef struct packed {
   logic Z; // Equal
